@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="assets/hero.png" alt="anthropic-managed-agents-skill" width="100%" />
+  <img src="assets/hero.png" alt="anthropic-managed-agents" width="100%" />
   <br/>
   <sub><i>(credit to <a href="https://twitter.com/rubenhassid">@rubenhassid</a> for photo idea)</i></sub>
 </p>
 
-# anthropic-managed-agents-skill
+# anthropic-managed-agents
 
 A catalog repository of [Agent Skills](https://agentskills.io/) for working with Anthropic's hosted agent platform.
 
@@ -37,21 +37,21 @@ Complete coverage of Anthropic's **Claude Managed Agents** API. When this skill 
 ### Via the Agent Skills CLI
 
 ```bash
-npx skills add gfsaaser24/anthropic-managed-agents-skill
+npx skills add gfsaaser24/anthropic-managed-agents
 ```
 
 **Non-interactive, Claude Code only** — accept defaults and scope the install to Claude Code without prompting:
 
 ```bash
-npx skills add -y gfsaaser24/anthropic-managed-agents-skill --agent claude-code
+npx skills add -y gfsaaser24/anthropic-managed-agents --agent claude-code
 ```
 
 ### Manual install (Claude Code)
 
 ```bash
-git clone https://github.com/gfsaaser24/anthropic-managed-agents-skill
+git clone https://github.com/gfsaaser24/anthropic-managed-agents
 mkdir -p ~/.claude/skills
-cp -r anthropic-managed-agents-skill/skills/anthropic-managed-agents ~/.claude/skills/
+cp -r anthropic-managed-agents/skills/anthropic-managed-agents ~/.claude/skills/
 ```
 
 ### Claude.ai sandbox

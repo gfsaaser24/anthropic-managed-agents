@@ -44,7 +44,7 @@ cp -r skills/anthropic-managed-agents ~/.claude/skills/
 Or use the [Agent Skills CLI](https://github.com/vercel-labs/skills):
 
 ```bash
-npx skills add gfsaaser24/anthropic-managed-agents-skill
+npx skills add gfsaaser24/anthropic-managed-agents
 ```
 
 ## Snapshot date
