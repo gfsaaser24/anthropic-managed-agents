@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env.local
+.env*.local
+node_modules/
+*.skill
+# OAuth helper PKCE state (Asana OOB flow)
+.oauth-state.json
+# Session-event dumps from fetch-recent-errors.py
+session-events-*.json
+# Snapshot from dump-agent-prompt.py — gitignore in case it captures the live prompt
+agent-current-config.md
+agent-v*-proposed.md

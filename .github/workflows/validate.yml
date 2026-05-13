@@ -1,0 +1,52 @@
+name: Validate skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          python3 - <<'PY'
+          import sys, glob, re, json
+
+          errors = []
+          skills = glob.glob("skills/*/SKILL.md")
+          if not skills:
+              errors.append("No SKILL.md files found under skills/")
+
+          for path in skills:
+              with open(path, encoding="utf-8") as f:
+                  text = f.read()
+              m = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
+              if not m:
+                  errors.append(f"{path}: missing YAML frontmatter")
+                  continue
+              fm = m.group(1)
+              if not re.search(r"^name:\s*\S", fm, re.MULTILINE):
+                  errors.append(f"{path}: missing `name`")
+              if not re.search(r"^description:", fm, re.MULTILINE):
+                  errors.append(f"{path}: missing `description`")
+              # name must be kebab-case, no reserved words
+              nm = re.search(r"^name:\s*(\S+)", fm, re.MULTILINE)
+              if nm:
+                  name = nm.group(1).strip().strip('"').strip("'")
+                  if not re.fullmatch(r"[a-z0-9-]+", name):
+                      errors.append(f"{path}: name `{name}` must be kebab-case (lowercase letters, digits, hyphens)")
+                  if len(name) > 64:
+                      errors.append(f"{path}: name `{name}` exceeds 64 chars")
+                  if name in {"anthropic", "claude"}:
+                      errors.append(f"{path}: name `{name}` is reserved")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print(f"OK — validated {len(skills)} skill(s)")
+          PY
